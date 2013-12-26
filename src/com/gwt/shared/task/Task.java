@@ -22,13 +22,13 @@ public class Task implements Serializable {
 	@SequenceGenerator(name = "task_seq_gen", sequenceName = "tak_id_seq")
 	private long id;
 	
-	@Column(name="SUBJECT",unique = false, nullable = false, length = 200)
+	@Column(name="SUBJECT", unique = false, nullable = false, length = 200)
 	private String subject;
 	
-	@Column(name="EVENTTEXT",unique = false, nullable = true)
+	@Column(name="EVENTTEXT", unique = false, nullable = true)
 	private String text;
 	
-	@Column(name="DATAEVENT",unique = false, nullable = true)
+	@Column(name="DATAEVENT", unique = false, nullable = true)
 	private Date dateEvent;
 	
 	public Task(String subject, String text) {
