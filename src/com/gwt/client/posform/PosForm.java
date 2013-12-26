@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
+import com.gwt.shared.posmode.PosMode;
 import com.gwt.shared.task.Task;
 import com.sun.xml.internal.ws.api.ha.StickyFeature;
 
@@ -28,7 +29,6 @@ public class PosForm extends DialogBox {
 		super(autoHide, modal, captionWidget);
 		setAnimationEnabled(true);
 		setGlassEnabled(true);
-		setText("Task");
 		
 		VerticalPanel verticalPanel = new VerticalPanel();
 		HorizontalPanel buttonPanel = new HorizontalPanel();
@@ -53,6 +53,8 @@ public class PosForm extends DialogBox {
 		
 		buttonPanel.add(btnClose);
 		buttonPanel.add(btnSave);
+		
+		setTitle("Task");
 		HorizontalPanel subjectPanel = new HorizontalPanel();
 		subjectPanel.setSpacing(4);
 		subjectPanel.add(new Label("Subject:"));
@@ -72,6 +74,15 @@ public class PosForm extends DialogBox {
 	@Override
 	public void show() {
 		fill();
+		String titleText = getTitle();
+		if (editMode == PosMode.ADD_MODE) {
+			titleText = "Add " + titleText;			
+		} else if (editMode == PosMode.COPY_MODE) {
+			titleText = "Copy" + titleText;
+		} else if (editMode == PosMode.EDIT_MODE) {
+			titleText = "Edit " + titleText ;
+		}
+		setText(titleText);
 		super.show();
 	}
 
@@ -100,8 +111,27 @@ public class PosForm extends DialogBox {
 	}
 
 
+	public PosMode getEditMode() {
+		return editMode;
+	}
+
+	public void setEditMode(PosMode editMode) {
+		this.editMode = editMode;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
 	private Task curentTask = null;	
 	private TextBox subjectText = null;
 	private TextArea text = null;
 	private ListDataProvider<Task> dataProvider = null;
+	private PosMode editMode = PosMode.UNKNOWN_MODE;
+	private String title = "";
 }
