@@ -15,6 +15,7 @@ import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.gwt.client.posform.PosForm;
+import com.gwt.shared.posmode.PosMode;
 import com.gwt.shared.task.Task;
 
 public class TablePanel extends VerticalPanel {
@@ -30,6 +31,7 @@ public class TablePanel extends VerticalPanel {
 			public void onClick(ClickEvent event) {
 				PosForm posForm = new PosForm();
 				posForm.setDataProvider(dataProvider);
+				posForm.setEditMode(PosMode.ADD_MODE);
 				posForm.show();				
 			}
 		});
@@ -40,6 +42,7 @@ public class TablePanel extends VerticalPanel {
 				PosForm posForm = new PosForm();
 				posForm.setCurentTask(selectedTask);
 				posForm.setDataProvider(dataProvider);
+				posForm.setEditMode(PosMode.COPY_MODE);
 				posForm.show();				
 			}
 		});
@@ -80,6 +83,7 @@ public class TablePanel extends VerticalPanel {
 				PosForm posForm = new PosForm();
 				posForm.setCurentTask(selectedTask);
 				posForm.setDataProvider(dataProvider);
+				posForm.setEditMode(PosMode.EDIT_MODE);
 				posForm.show();		
 			}
 		}, DoubleClickEvent.getType());
