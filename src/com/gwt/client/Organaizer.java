@@ -22,10 +22,10 @@ public class Organaizer implements EntryPoint {
 		rightPanel.add(new TablePanel());
 	}
 	
-	public RootPanel headerPanel = null;
-	public RootPanel leftPanel = null;
-	public RootPanel rightPanel = null;
-	public RootPanel errorPanel = null;
+	public static RootPanel headerPanel = null;
+	public static RootPanel leftPanel = null;
+	public static RootPanel rightPanel = null;
+	public static RootPanel errorPanel = null;
 
 	/**
 	 * Create a remote service proxy to talk to the server-side Greeting service.
