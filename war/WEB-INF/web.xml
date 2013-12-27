@@ -16,6 +16,16 @@
     <url-pattern>/organaizer/greet</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>tablepanelServlet</servlet-name>
+    <servlet-class>com.gwt.server.tablepanel.TablePanelServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>tablepanelServlet</servlet-name>
+    <url-pattern>/organaizer/tablepanel</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>Organaizer.html</welcome-file>

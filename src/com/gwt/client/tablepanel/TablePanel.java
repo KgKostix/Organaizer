@@ -1,5 +1,9 @@
 package com.gwt.client.tablepanel;
 
+import java.util.Date;
+import java.util.List;
+
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -8,12 +12,15 @@ import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
+import com.gwt.client.Organaizer;
 import com.gwt.client.posform.PosForm;
 import com.gwt.shared.posmode.PosMode;
 import com.gwt.shared.task.Task;
@@ -115,10 +122,20 @@ public class TablePanel extends VerticalPanel {
 	    
 	    dataProvider = new ListDataProvider<Task>();
 	    
-	    java.util.List<Task> list = dataProvider.getList();
-	    for (int i = 0; i < 10; i++) {
-	    	list.add(new Task("subject " + i, "text " +i));	
-	    }
+	    final java.util.List<Task> list = dataProvider.getList();
+	    tablePanelServaiceIAsync.getTaskList(Long.MIN_VALUE, new Date(), new AsyncCallback<List<Task>>() {
+			
+			@Override
+			public void onSuccess(List<Task> result) {
+				list.addAll(result);
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Organaizer.errorPanel.add(new HTML(caught.toString()));
+			}
+		});
+	    
 	 
 	    dataProvider.addDataDisplay(taskTable);	   
 	    taskTable.setVisibleRange(0, 15);
@@ -128,4 +145,6 @@ public class TablePanel extends VerticalPanel {
 	
 	private Task selectedTask = null;
 	private ListDataProvider<Task> dataProvider = null;
+	protected final TablePanelServaiceAsync tablePanelServaiceIAsync = GWT
+			.create(TablePanelServaice.class);
 }

@@ -1,5 +1,7 @@
 package com.gwt.client.posform;
 
+import java.util.Date;
+
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -46,7 +48,7 @@ public class PosForm extends DialogBox {
 			@Override
 			public void onClick(ClickEvent event) {
 				dataProvider.getList().add(
-						new Task(subjectText.getValue(), text.getValue()));
+						new Task(0,subjectText.getValue(), text.getValue(), new Date()));
 				hide();
 			}
 		});			

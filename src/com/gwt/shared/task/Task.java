@@ -14,8 +14,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "task")
 public class Task implements Serializable {
-	private static final long serialVersionUID = -6011496818179621243L;
 	
+	private static final long serialVersionUID = -6910258470549712462L;
+
 	@Id  
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "task_seq_gen")
@@ -31,10 +32,18 @@ public class Task implements Serializable {
 	@Column(name="DATAEVENT", unique = false, nullable = true)
 	private Date dateEvent;
 	
-	public Task(String subject, String text) {
+	
+	public Task() {
 		super();
+	}
+
+	public Task(long id, String subject, String text, Date dateEvent) {
+		super();
+		this.id = id;
 		this.subject = subject;
 		this.text = text;
+		this.dateEvent = dateEvent;
+		
 	}
 
 	public String getSubject() {
